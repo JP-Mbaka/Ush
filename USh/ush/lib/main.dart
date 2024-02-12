@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Ush',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,21 +33,13 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+       
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 224, 197, 41)),
+        appBarTheme: AppBarTheme(backgroundColor: Theme.of(context).colorScheme.onSecondaryContainer, foregroundColor: Theme.of(context).colorScheme.secondaryContainer, titleTextStyle: TextStyle().copyWith(fontSize: 18)),
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home:  const SplashScreen(
-        seconds: 8,
-        navigateAfterSeconds:Home(),
-        title: Text(
-          'SplashScreen Example',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
-              color: Colors.white),
-      ),
-      )
+      home:  SplashScreen()
       
     //   SplashScreen(future: _isOnline(), builder: (context,snapshot){
     //     if(snapshot.connectionState == ConnectionState.waiting){
