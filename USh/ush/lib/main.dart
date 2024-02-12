@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ush/home.dart';
-import 'package:ush/result.dart';
 import 'package:ush/splash.dart';
 
 void main() {
@@ -10,9 +9,7 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  Future _isOnline() async {
-
-  }
+ 
 
   // This widget is the root of your application.
   @override
@@ -39,15 +36,27 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: FutureBuilder(future: _isOnline(), builder: (context,snapshot){
-        if(snapshot.connectionState == ConnectionState.waiting){
-          return SplashScreen();
-        }
-        if(snapshot.hasData || snapshot.data!.isEmpty){
-          return Result();
-        }
-        return Home();
-      }),
+      home:  const SplashScreen(
+        seconds: 8,
+        navigateAfterSeconds:Home(),
+        title: Text(
+          'SplashScreen Example',
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              color: Colors.white),
+      ),
+      )
+      
+    //   SplashScreen(future: _isOnline(), builder: (context,snapshot){
+    //     if(snapshot.connectionState == ConnectionState.waiting){
+    //       return SplashScreen();
+    //     }
+    //     if(snapshot.hasData || snapshot.data!.isEmpty){
+    //       return Result();
+    //     }
+    //     return Home();
+    //   }),
     );
   }
 }
