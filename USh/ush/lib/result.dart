@@ -1,6 +1,7 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:ush/splash.dart';
 
 class Result extends StatefulWidget {
   Result({super.key, required this.selectedTime});
@@ -11,7 +12,7 @@ class Result extends StatefulWidget {
 }
 
 class ResultState extends State<Result> {
-  String res = "";
+  bool isFree = true;
   TimeOfDay tred11 = TimeOfDay(hour: 9, minute: 00);
   TimeOfDay tred12 = TimeOfDay(hour: 12, minute: 00);
   TimeOfDay tred21 = TimeOfDay(hour: 14, minute: 00);
@@ -29,24 +30,59 @@ class ResultState extends State<Result> {
     //     }
     if (isBefore(widget.selectedTime, tred11) &&
         isBefore(widget.selectedTime, tred12)) {
-      content = const Text("Traffic is Free");
+      content = Text("Traffic is Free",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.blue));
+      isFree = true;
     } else if (isAfter(widget.selectedTime, tred11) &&
         isBefore(widget.selectedTime, tred12)) {
-      content = const Text("Traffic is Congested");
+      content = Text("Traffic is Congested",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.red));
+      isFree = false;
     } else if (isBefore(widget.selectedTime, tred21) &&
         isBefore(widget.selectedTime, tred22)) {
-      content = const Text("Traffic is Free");
-    } else if (isAfter(widget.selectedTime, tred11) &&
-        isBefore(widget.selectedTime, tred12)) {
-      content = const Text("Traffic is Congested");
+      content = Text("Traffic is Free",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.blue));
+      isFree = true;
+    } else if (isAfter(widget.selectedTime, tred21) &&
+        isBefore(widget.selectedTime, tred22)) {
+      content = Text("Traffic is Congested",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.red));
+      isFree = false;
     } else if (isBefore(widget.selectedTime, tred31) &&
         isBefore(widget.selectedTime, tred32)) {
-      content = const Text("Traffic is Free");
-    } else if (isAfter(widget.selectedTime, tred11) &&
-        isBefore(widget.selectedTime, tred12)) {
-      content = const Text("Traffic is Congested");
+      content = Text("Traffic is Free",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.blue));
+      isFree = true;
+    } else if (isAfter(widget.selectedTime, tred31) &&
+        isBefore(widget.selectedTime, tred32)) {
+      content = Text("Traffic is Congested",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.red));
+      isFree = false;
     } else {
-      content = const Text("Traffic is Congested");
+      content = Text("Traffic is Free",
+          style: Theme.of(context)
+              .textTheme
+              .displaySmall!
+              .copyWith(fontWeight: FontWeight.w800, color: Colors.blue));
+      isFree = true;
     }
 
     return Scaffold(
@@ -58,11 +94,30 @@ class ResultState extends State<Result> {
         width: double.infinity,
         child: Column(
           children: [
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             SizedBox(
-              child: Text(TimeOfDay.now().toString()),
+              child: Image.asset(
+                isFree ? "asset/images/free.jpg" : "asset/images/jam.jpg",
+                height: MediaQuery.of(context).size.height * 0.45,
+                width: MediaQuery.of(context).size.height * 0.6,
+              ),
             ),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             SizedBox(
               child: content,
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (_) => SplashScreen()));
+                    },
+                    child: const Icon(Icons.repeat)),
+              ),
             )
           ],
         ),

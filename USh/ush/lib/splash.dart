@@ -35,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Text(
               "Traffic Forecast",
-              style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  color: Theme.of(context).colorScheme.tertiary,
                   fontWeight: FontWeight.w800),
             ),
             const SizedBox(height: 40),
